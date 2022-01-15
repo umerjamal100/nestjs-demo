@@ -1,0 +1,72 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Product {
+  id: Float!
+  platform: String!
+  platformProductId: String!
+  storeName: String!
+  category: String!
+  name: String!
+  description: String!
+  imageUrl: String!
+  currency: String!
+  price: Float!
+  discountedPrice: Float!
+  storeChannel: [StoreChannel!]
+}
+
+type Review {
+  id: Float!
+  date: DateTime!
+  platformReviewId: String!
+  ratingValue: Float!
+  review: String!
+  platformStoreId: String!
+  reviewerId: String!
+  storeChannel: StoreChannel!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type StoreChannel {
+  id: Float!
+  phone: String!
+  city: String!
+  priceLevel: String!
+  ticketPrice: Float!
+  rating: Float!
+  platform: String!
+  platformStoreId: String!
+  platformStoreName: String!
+  platformStoreDescription: String!
+  platformStoreAddress: String!
+  platformStoreUrl: String!
+  note: String!
+  products: [Product!]
+  reviews: [Review!]
+  store: Store!
+}
+
+type Store {
+  placeId: String!
+  name: String
+  locationLat: Float
+  locationLng: Float
+  address: String
+  rating: Float
+  type: String
+  numRatings: Float
+  storeChannels: [StoreChannel!]
+}
+
+type Query {
+  store(name: String!): [Store!]!
+  fetchRestaurantsOnly(id: String!): [Review!]!
+  parseIndexData(id: String!): [Review!]!
+  storeReviews(id: String!): [Review!]!
+}
