@@ -33,8 +33,8 @@ import { S3 } from 'aws-sdk';
       inject: [ConfigService],
       useFactory: async (configService: ConfigService): Promise<S3> => {
         return new S3({
-          accessKeyId: 'AKIA5TW2Y7HIACUOSKUX',
-          secretAccessKey: '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',
+          accessKeyId: configService.get('AWS_ACCESS_KEY'),
+          secretAccessKey: configService.get('AWS_SECRET_KEY'),
           region: 'ap-south-1',
         });
       },
